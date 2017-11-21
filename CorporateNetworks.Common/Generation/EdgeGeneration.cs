@@ -7,13 +7,37 @@ namespace CorporateNetworks.Common.Generation
 {
     public static class EdgeGeneration
     {
-        private static List<Edge> graph;
-        private static List<Edge> transposeGraph;
+        private static List<WeightedEdge> graph;
+        private static List<WeightedEdge> transposeGraph;
 
-        public static List<Edge> GenerateEdges(int nodesCount)
+        public static List<WeightedEdge> GenerateWeightedEdges(int nodesCount, bool areWeightsPositive = false, bool areEdgesDirectional = true)
         {
-            graph = new List<Edge>();
-            transposeGraph = new List<Edge>();
+            var edges = GenerateEdges(nodesCount, areEdgesDirectional).ToList();
+
+            var random = new Random();
+
+            foreach (var edge in edges)
+            {
+                if (areEdgesDirectional ||
+                    double.IsInfinity(edges.First(e => e.Parent == edge.Child && e.Child == edge.Parent).Weight))
+                {
+                    edge.Weight = areWeightsPositive
+                        ? random.NextDouble() * nodesCount
+                        : nodesCount * (2 * random.NextDouble() - 1);
+                }
+                else
+                {
+                    edge.Weight = edges.First(e => e.Parent == edge.Child && e.Child == edge.Parent).Weight;
+                }
+            }
+
+            return edges;
+        }
+
+        private static IEnumerable<WeightedEdge> GenerateEdges(int nodesCount, bool areEdgesDirectional)
+        {
+            graph = new List<WeightedEdge>();
+            transposeGraph = new List<WeightedEdge>();
             var nodes = new HashSet<int>();
 
             var minEdgeCount = nodesCount - 1;
@@ -31,12 +55,19 @@ namespace CorporateNetworks.Common.Generation
                     child = random.Next(0, nodesCount);
                 }
 
-                var edge = graph.Find(e => e.Parent == parent && e.Child == child);
+                var edge = areEdgesDirectional
+                            ? graph.Find(e => e.Parent == parent && e.Child == child)
+                            : graph.Find(e => e.Parent == parent && e.Child == child || e.Parent == child && e.Child == parent);
 
                 if (edge == null)
                 {
-                    graph.Add(new Edge { Parent = parent, Child = child });
-                    transposeGraph.Add(new Edge { Child = parent, Parent = child });
+                    graph.Add(new WeightedEdge { Parent = parent, Child = child });
+                    transposeGraph.Add(new WeightedEdge { Child = parent, Parent = child });
+                    if (!areEdgesDirectional)
+                    {
+                        graph.Add(new WeightedEdge { Parent = child, Child = parent });
+                        transposeGraph.Add(new WeightedEdge { Child = child, Parent = parent });
+                    }
                     nodes.Add(parent);
                     nodes.Add(child);
                 }
@@ -45,29 +76,10 @@ namespace CorporateNetworks.Common.Generation
             return graph;
         }
 
-        public static List<WeightedEdge> GenerateWeightedEdges(int nodesCount, bool areWeightsPositive = false)
-        {
-            var edges = GenerateEdges(nodesCount);
-
-            var random = new Random();
-
-            var weightedEdges = edges.Select(e =>
-                new WeightedEdge
-                {
-                    Child = e.Child,
-                    Parent = e.Parent,
-                    Weight = areWeightsPositive
-                    ? random.NextDouble() * nodesCount
-                    : nodesCount * (2 * random.NextDouble() - 1)
-                });
-
-            return weightedEdges.ToList();
-        }
-
-        private static bool IsStrongConnected(List<Edge> edges, int nodesCount)
+        private static bool IsStrongConnected(List<WeightedEdge> edges, int nodesCount)
         {
             graph = edges;
-            transposeGraph = graph.Select(e => new Edge {Child = e.Parent, Parent = e.Child}).ToList();
+            transposeGraph = graph.Select(e => new WeightedEdge() {Child = e.Parent, Parent = e.Child}).ToList();
             var order = new List<int>();
 
             var used = new bool[nodesCount];

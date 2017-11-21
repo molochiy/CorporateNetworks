@@ -44,14 +44,15 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algorithms\BellmanFordAlgorithm.cs" />
+    <Compile Include="Algorithms\BFSAlgorithm.cs" />
+    <Compile Include="Algorithms\DijkstraAlgorithm.cs" />
     <Compile Include="Drawing\Graph.cs" />
     <Compile Include="Extensions\ListEdgesExtension.cs" />
     <Compile Include="Extensions\ListResultsExtension.cs" />
     <Compile Include="Generation\EdgeGeneration.cs" />
-    <Compile Include="Models\Edge.cs" />
     <Compile Include="Models\Node.cs" />
     <Compile Include="Models\Position.cs" />
-    <Compile Include="Models\ResultModel.cs" />
     <Compile Include="Models\WeightedResultModel.cs" />
     <Compile Include="Models\WeightedEdge.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

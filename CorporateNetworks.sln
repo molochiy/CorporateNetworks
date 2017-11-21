@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorporateNetworks.Dijkstra"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorporateNetworks.BellmanFord", "CorporateNetworks.BellmanFord\CorporateNetworks.BellmanFord.csproj", "{EF83A418-4105-4C2D-A3EB-64C2554147F9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorporateNetworks.Yen", "CorporateNetworks.Yen\CorporateNetworks.Yen.csproj", "{1FC4F790-FA97-4033-AD29-CFD19AFA5B1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{EF83A418-4105-4C2D-A3EB-64C2554147F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF83A418-4105-4C2D-A3EB-64C2554147F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF83A418-4105-4C2D-A3EB-64C2554147F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FC4F790-FA97-4033-AD29-CFD19AFA5B1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FC4F790-FA97-4033-AD29-CFD19AFA5B1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FC4F790-FA97-4033-AD29-CFD19AFA5B1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FC4F790-FA97-4033-AD29-CFD19AFA5B1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

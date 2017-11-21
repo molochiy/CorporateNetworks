@@ -4,11 +4,11 @@ using System.Text;
 using CorporateNetworks.Common.Extensions;
 using CorporateNetworks.Common.Models;
 
-namespace CorporateNetworks.BellmanFord
+namespace CorporateNetworks.Common.Algorithms
 {
     public class BellmanFordAlgorithm
     {
-        public static IEnumerable<ResultModel> Run(List<WeightedEdge> edges, int nodesCount, int nodeToStart, out bool hasNegativeCycle)
+        public static IEnumerable<WeightedResultModel> Run(List<WeightedEdge> edges, int nodesCount, int nodeToStart, out bool hasNegativeCycle)
         {
             var weights = Enumerable.Repeat(double.PositiveInfinity, nodesCount).ToArray();
             var pathes = Enumerable.Repeat(-1, nodesCount).ToArray();
@@ -30,7 +30,7 @@ namespace CorporateNetworks.BellmanFord
                 }
             }
 
-            List<WeightedResultModel> results = null;
+            List<WeightedResultModel> results;
 
             if (nodeAccessibleFromNegativeCycle != -1)
             {
@@ -60,7 +60,7 @@ namespace CorporateNetworks.BellmanFord
                 hasNegativeCycle = false;
                 results = weights.Select((value, index) => new WeightedResultModel { Node = index, Weight = value, Path = new StringBuilder(index.ToString()) }).ToList();
 
-                results.Cast<ResultModel>().ToList().BuildPathes(pathes, nodeToStart);
+                results.ToList().BuildPathes(pathes, nodeToStart);
             }
 
             return results;

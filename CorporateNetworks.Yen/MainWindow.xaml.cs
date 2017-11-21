@@ -11,12 +11,12 @@ using CorporateNetworks.Common.Models;
 using CorporateNetworks.Common.Serialization;
 using Microsoft.Win32;
 
-namespace CorporateNetworks.BFS
+namespace CorporateNetworks.Yen
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow
+    public partial class MainWindow : Window
     {
         private readonly Graph graphDrawing;
         private readonly List<WeightedEdge> edges = new List<WeightedEdge>();
@@ -30,7 +30,7 @@ namespace CorporateNetworks.BFS
 
         private void Generate_Click(object sender, RoutedEventArgs e)
         {
-            this.Draw(EdgeGeneration.GenerateWeightedEdges(Convert.ToInt32(this.NodesNumber.Value)));
+            this.Draw(EdgeGeneration.GenerateWeightedEdges(Convert.ToInt32(this.NodesNumber.Value), true, false));
         }
 
         private void LoadEdges_Click(object sender, RoutedEventArgs e)
@@ -64,12 +64,14 @@ namespace CorporateNetworks.BFS
         {
             this.edges.Clear();
             this.edges.AddRange(edgesToWrite);
-            this.graphDrawing.Draw(this.edges);
+            this.graphDrawing.Draw(this.edges.ToList());
             this.adjacencyMatrix = edgesToWrite.ToAdjacencyMatrix();
             this.NodeToStart.Minimum = 0;
             this.NodeToStart.Maximum = this.adjacencyMatrix.Length - 1;
+            this.NodeToEnd.Minimum = 0;
+            this.NodeToEnd.Maximum = this.adjacencyMatrix.Length - 1;
+            this.AmountPaths.Minimum = 1;
             this.CalculationGroupBox.IsEnabled = true;
-            this.EdgesDataGrid.ItemsSource = null;
             this.EdgesDataGrid.ItemsSource = this.edges;
             this.EdgesDataGrid.Items.Refresh();
         }
@@ -77,10 +79,12 @@ namespace CorporateNetworks.BFS
         private void Calculate_Click(object sender, RoutedEventArgs e)
         {
             var nodeToStart = Convert.ToInt32(this.NodeToStart.Value);
+            var nodeToEnd = Convert.ToInt32(this.NodeToEnd.Value);
+            var amountPaths = Convert.ToInt32(this.AmountPaths.Value);
 
             var timer = Stopwatch.StartNew();
 
-            var result = BfsAlgorithm.Run(this.adjacencyMatrix, nodeToStart).ToList();
+            var result = YenAlgorithm.Run(this.adjacencyMatrix, nodeToStart, nodeToEnd, amountPaths).ToList();
 
             timer.Stop();
 

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows;
+using CorporateNetworks.Common.Algorithms;
 using CorporateNetworks.Common.Drawing;
 using CorporateNetworks.Common.Extensions;
 using CorporateNetworks.Common.Generation;
@@ -36,7 +38,8 @@ namespace CorporateNetworks.BellmanFord
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
-                Filter = "Xml files (*.xml)|*.xml|All files (*.*)|*.*"
+                Filter = "Xml files (*.xml)|*.xml|All files (*.*)|*.*",
+                InitialDirectory = Directory.GetParent(System.Reflection.Assembly.GetExecutingAssembly().Location).FullName
             };
 
             if (openFileDialog.ShowDialog() == true)
@@ -49,7 +52,8 @@ namespace CorporateNetworks.BellmanFord
         {
             var saveFileDialog = new SaveFileDialog
             {
-                Filter = "Xml files (*.xml)|*.xml"
+                Filter = "Xml files (*.xml)|*.xml",
+                InitialDirectory = Directory.GetParent(System.Reflection.Assembly.GetExecutingAssembly().Location).FullName
             };
             if (saveFileDialog.ShowDialog() == true)
             {
@@ -61,11 +65,12 @@ namespace CorporateNetworks.BellmanFord
         {
             this.edges.Clear();
             this.edges.AddRange(edgesToWrite);
-            this.graphDrawing.Draw(this.edges.Cast<Edge>().ToList());
+            this.graphDrawing.Draw(this.edges.ToList());
             this.adjacencyMatrix = edgesToWrite.ToAdjacencyMatrix();
             this.NodeToStart.Minimum = 0;
             this.NodeToStart.Maximum = this.adjacencyMatrix.Length - 1;
             this.CalculationGroupBox.IsEnabled = true;
+            this.EdgesDataGrid.ItemsSource = null;
             this.EdgesDataGrid.ItemsSource = this.edges;
             this.EdgesDataGrid.Items.Refresh();
         }
@@ -73,7 +78,7 @@ namespace CorporateNetworks.BellmanFord
         private void Calculate_Click(object sender, RoutedEventArgs e)
         {
             var nodeToStart = Convert.ToInt32(this.NodeToStart.Value);
-            var nodesCount = this.edges.Cast<Edge>().ToList().GetNodesCount();
+            var nodesCount = this.edges.ToList().GetNodesCount();
 
             var timer = Stopwatch.StartNew();
 

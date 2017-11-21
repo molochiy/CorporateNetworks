@@ -4,13 +4,14 @@ using System.Text;
 using CorporateNetworks.Common.Extensions;
 using CorporateNetworks.Common.Models;
 
-namespace CorporateNetworks.BFS
+namespace CorporateNetworks.Common.Algorithms
 {
     public static class BfsAlgorithm
     {
-        public static IEnumerable<ResultModel> Run(double[][] adjacencyMatrix, int nodeToStart)
+        public static IEnumerable<WeightedResultModel> Run(double[][] adjacencyMatrix, int nodeToStart)
         {
             var nodesCount = adjacencyMatrix.Length;
+            var weights = Enumerable.Repeat(double.PositiveInfinity, nodesCount).ToArray();
             var used = new bool[nodesCount];
             var pathes = Enumerable.Repeat(-1, nodesCount).ToArray();
 
@@ -18,6 +19,7 @@ namespace CorporateNetworks.BFS
 
             nodesToCheck.Enqueue(nodeToStart);
             used[nodeToStart] = true;
+            weights[nodeToStart] = 0;
 
             while (nodesToCheck.Count > 0)
             {
@@ -29,10 +31,11 @@ namespace CorporateNetworks.BFS
                     used[i] = true;
                     nodesToCheck.Enqueue(i);
                     pathes[i] = parent;
+                    weights[i] = weights[parent] + adjacencyMatrix[parent][i];
                 }
             }
 
-            var results = pathes.Select((value, index) => new ResultModel { Node = index, Path = new StringBuilder(index.ToString()) }).ToList();
+            var results = weights.Select((value, index) => new WeightedResultModel { Node = index, Weight = value, Path = new StringBuilder(index.ToString()) }).ToList();
 
             results.BuildPathes(pathes, nodeToStart);
 

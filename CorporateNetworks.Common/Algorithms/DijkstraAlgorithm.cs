@@ -4,11 +4,11 @@ using System.Text;
 using CorporateNetworks.Common.Extensions;
 using CorporateNetworks.Common.Models;
 
-namespace CorporateNetworks.Dijkstra
+namespace CorporateNetworks.Common.Algorithms
 {
     public class DijkstraAlgorithm
     {
-        public static IEnumerable<ResultModel> Run(double[][] adjacencyMatrix, int nodeToStart)
+        public static IEnumerable<WeightedResultModel> Run(double[][] adjacencyMatrix, int nodeToStart)
         {
             var nodesCount = adjacencyMatrix.Length;
             var weights = Enumerable.Repeat(double.PositiveInfinity, nodesCount).ToArray();
@@ -44,7 +44,7 @@ namespace CorporateNetworks.Dijkstra
 
             var results = weights.Select((value, index) => new WeightedResultModel { Node = index, Weight = value, Path = new StringBuilder(index.ToString()) }).ToList();
 
-            results.Cast<ResultModel>().ToList().BuildPathes(pathes, nodeToStart);
+            results.ToList().BuildPathes(pathes, nodeToStart);
 
             return results;
         }

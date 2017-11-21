@@ -1,10 +1,10 @@
 ﻿using System.Text;
 
-namespace CorporateNetworks.Common.Models
+namespace CorporateNetworks.Yen
 {
-    public class WeightedResultModel
+    public class YenResultModel
     {
-        public int Node { get; set; }
+        public int Iteration { get; set; }
 
         public StringBuilder Path { get; set; }
 

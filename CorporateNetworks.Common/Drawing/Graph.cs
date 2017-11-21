@@ -25,7 +25,7 @@ namespace CorporateNetworks.Common.Drawing
             this.graphCanvas = canvas;
         }
 
-        public void Draw(List<Edge> edges)
+        public void Draw(List<WeightedEdge> edges)
         {
             this.CleanUp();
             var canvasVerticleMiddle = this.graphCanvas.ActualHeight / 2;
@@ -59,7 +59,7 @@ namespace CorporateNetworks.Common.Drawing
             this.DrawEdges(edges);
         }
 
-        private void DrawEdge(Edge edge, Color color, bool isTransposeEdge = false)
+        private void DrawEdge(WeightedEdge edge, Color color, bool isTransposeEdge = false)
         {
             var parentNodePosition = this.nodes.Find(ep => ep.Id == edge.Parent).Position;
             var childNodePosition = this.nodes.Find(ep => ep.Id == edge.Child).Position;
@@ -126,9 +126,9 @@ namespace CorporateNetworks.Common.Drawing
             this.graphCanvas.Children.Add(nodeText);
         }
 
-        private void DrawEdges(List<Edge> edges)
+        private void DrawEdges(List<WeightedEdge> edges)
         {
-            var drawnEdges = new List<Edge>();
+            var drawnEdges = new List<WeightedEdge>();
             edges.Sort((e1, e2) => e1.Parent != e2.Parent ? e1.Parent - e2.Parent : e1.Child - e2.Child);
             foreach (var edge in edges)
             {

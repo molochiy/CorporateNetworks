@@ -47,14 +47,17 @@
     <Compile Include="Algorithms\BellmanFordAlgorithm.cs" />
     <Compile Include="Algorithms\BFSAlgorithm.cs" />
     <Compile Include="Algorithms\DijkstraAlgorithm.cs" />
+    <Compile Include="Algorithms\YenAlgorithm.cs" />
     <Compile Include="Drawing\Graph.cs" />
     <Compile Include="Extensions\ListEdgesExtension.cs" />
     <Compile Include="Extensions\ListResultsExtension.cs" />
     <Compile Include="Generation\EdgeGeneration.cs" />
     <Compile Include="Models\Node.cs" />
     <Compile Include="Models\Position.cs" />
-    <Compile Include="Models\WeightedResultModel.cs" />
-    <Compile Include="Models\WeightedEdge.cs" />
+    <Compile Include="Models\WeightedPath.cs" />
+    <Compile Include="Models\PathToNode.cs" />
+    <Compile Include="Models\Edge.cs" />
+    <Compile Include="Models\IteratedPath.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialization\XmlSerialization.cs" />
   </ItemGroup>

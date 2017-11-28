@@ -8,7 +8,7 @@ namespace CorporateNetworks.Common.Algorithms
 {
     public class BellmanFordAlgorithm
     {
-        public static IEnumerable<WeightedResultModel> Run(List<WeightedEdge> edges, int nodesCount, int nodeToStart, out bool hasNegativeCycle)
+        public static IEnumerable<PathToNode> Run(List<Edge> edges, int nodesCount, int nodeToStart, out bool hasNegativeCycle)
         {
             var weights = Enumerable.Repeat(double.PositiveInfinity, nodesCount).ToArray();
             var pathes = Enumerable.Repeat(-1, nodesCount).ToArray();
@@ -30,7 +30,7 @@ namespace CorporateNetworks.Common.Algorithms
                 }
             }
 
-            List<WeightedResultModel> results;
+            List<PathToNode> results;
 
             if (nodeAccessibleFromNegativeCycle != -1)
             {
@@ -50,15 +50,15 @@ namespace CorporateNetworks.Common.Algorithms
                     path.Insert(0, $"{nodeInNegativeCycle}=>");
                 }
 
-                results = new List<WeightedResultModel>
+                results = new List<PathToNode>
                 {
-                    new WeightedResultModel {Path = path}
+                    new PathToNode {Path = path}
                 };
             }
             else
             {
                 hasNegativeCycle = false;
-                results = weights.Select((value, index) => new WeightedResultModel { Node = index, Weight = value, Path = new StringBuilder(index.ToString()) }).ToList();
+                results = weights.Select((value, index) => new PathToNode { Node = index, Weight = value, Path = new StringBuilder(index.ToString()) }).ToList();
 
                 results.ToList().BuildPathes(pathes, nodeToStart);
             }

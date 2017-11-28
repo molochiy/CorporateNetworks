@@ -7,10 +7,10 @@ namespace CorporateNetworks.Common.Generation
 {
     public static class EdgeGeneration
     {
-        private static List<WeightedEdge> graph;
-        private static List<WeightedEdge> transposeGraph;
+        private static List<Edge> graph;
+        private static List<Edge> transposeGraph;
 
-        public static List<WeightedEdge> GenerateWeightedEdges(int nodesCount, bool areWeightsPositive = false, bool areEdgesDirectional = true)
+        public static List<Edge> GenerateWeightedEdges(int nodesCount, bool areWeightsPositive = false, bool areEdgesDirectional = true)
         {
             var edges = GenerateEdges(nodesCount, areEdgesDirectional).ToList();
 
@@ -34,10 +34,10 @@ namespace CorporateNetworks.Common.Generation
             return edges;
         }
 
-        private static IEnumerable<WeightedEdge> GenerateEdges(int nodesCount, bool areEdgesDirectional)
+        private static IEnumerable<Edge> GenerateEdges(int nodesCount, bool areEdgesDirectional)
         {
-            graph = new List<WeightedEdge>();
-            transposeGraph = new List<WeightedEdge>();
+            graph = new List<Edge>();
+            transposeGraph = new List<Edge>();
             var nodes = new HashSet<int>();
 
             var minEdgeCount = nodesCount - 1;
@@ -61,12 +61,12 @@ namespace CorporateNetworks.Common.Generation
 
                 if (edge == null)
                 {
-                    graph.Add(new WeightedEdge { Parent = parent, Child = child });
-                    transposeGraph.Add(new WeightedEdge { Child = parent, Parent = child });
+                    graph.Add(new Edge { Parent = parent, Child = child });
+                    transposeGraph.Add(new Edge { Child = parent, Parent = child });
                     if (!areEdgesDirectional)
                     {
-                        graph.Add(new WeightedEdge { Parent = child, Child = parent });
-                        transposeGraph.Add(new WeightedEdge { Child = child, Parent = parent });
+                        graph.Add(new Edge { Parent = child, Child = parent });
+                        transposeGraph.Add(new Edge { Child = child, Parent = parent });
                     }
                     nodes.Add(parent);
                     nodes.Add(child);
@@ -76,10 +76,10 @@ namespace CorporateNetworks.Common.Generation
             return graph;
         }
 
-        private static bool IsStrongConnected(List<WeightedEdge> edges, int nodesCount)
+        private static bool IsStrongConnected(List<Edge> edges, int nodesCount)
         {
             graph = edges;
-            transposeGraph = graph.Select(e => new WeightedEdge() {Child = e.Parent, Parent = e.Child}).ToList();
+            transposeGraph = graph.Select(e => new Edge() {Child = e.Parent, Parent = e.Child}).ToList();
             var order = new List<int>();
 
             var used = new bool[nodesCount];

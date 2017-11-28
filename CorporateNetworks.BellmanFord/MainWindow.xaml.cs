@@ -20,7 +20,7 @@ namespace CorporateNetworks.BellmanFord
     public partial class MainWindow
     {
         private readonly Graph graphDrawing;
-        private readonly List<WeightedEdge> edges = new List<WeightedEdge>();
+        private readonly List<Edge> edges = new List<Edge>();
         private double[][] adjacencyMatrix;
 
         public MainWindow()
@@ -44,7 +44,7 @@ namespace CorporateNetworks.BellmanFord
 
             if (openFileDialog.ShowDialog() == true)
             {
-                this.Draw(XmlSerialization.ReadFromXmlFile<List<WeightedEdge>>(openFileDialog.FileName));
+                this.Draw(XmlSerialization.ReadFromXmlFile<List<Edge>>(openFileDialog.FileName));
             }
         }
 
@@ -61,7 +61,7 @@ namespace CorporateNetworks.BellmanFord
             }
         }
 
-        private void Draw(List<WeightedEdge> edgesToWrite)
+        private void Draw(List<Edge> edgesToWrite)
         {
             this.edges.Clear();
             this.edges.AddRange(edgesToWrite);

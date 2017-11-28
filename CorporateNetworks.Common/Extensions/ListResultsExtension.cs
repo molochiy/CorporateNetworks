@@ -6,7 +6,7 @@ namespace CorporateNetworks.Common.Extensions
 {
     public static class ListResultsExtension
     {
-        public static void BuildPathes(this List<WeightedResultModel> results, int [] pathes, int nodeToStart)
+        public static void BuildPathes(this List<PathToNode> results, int [] pathes, int nodeToStart)
         {
             var queue = new Queue<int>();
             queue.Enqueue(nodeToStart);

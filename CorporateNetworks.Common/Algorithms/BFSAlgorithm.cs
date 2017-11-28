@@ -8,7 +8,7 @@ namespace CorporateNetworks.Common.Algorithms
 {
     public static class BfsAlgorithm
     {
-        public static IEnumerable<WeightedResultModel> Run(double[][] adjacencyMatrix, int nodeToStart)
+        public static IEnumerable<PathToNode> Run(double[][] adjacencyMatrix, int nodeToStart)
         {
             var nodesCount = adjacencyMatrix.Length;
             var weights = Enumerable.Repeat(double.PositiveInfinity, nodesCount).ToArray();
@@ -35,7 +35,7 @@ namespace CorporateNetworks.Common.Algorithms
                 }
             }
 
-            var results = weights.Select((value, index) => new WeightedResultModel { Node = index, Weight = value, Path = new StringBuilder(index.ToString()) }).ToList();
+            var results = weights.Select((value, index) => new PathToNode { Node = index, Weight = value, Path = new StringBuilder(index.ToString()) }).ToList();
 
             results.BuildPathes(pathes, nodeToStart);
 

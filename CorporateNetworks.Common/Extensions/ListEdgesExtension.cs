@@ -6,15 +6,15 @@ namespace CorporateNetworks.Common.Extensions
 {
     public static class ListEdgesExtension
     {
-        public static IEnumerable<WeightedEdge> GetNotDirectionedEdges(this List<WeightedEdge> edges)
+        public static IEnumerable<Edge> GetNotDirectionedEdges(this List<Edge> edges)
         {
             var notDirectionedEdges = edges.ToList();
-            notDirectionedEdges.AddRange(edges.Select(e => new WeightedEdge { Child = e.Parent, Parent = e.Child, Weight = e.Weight }).ToList());
+            notDirectionedEdges.AddRange(edges.Select(e => new Edge { Child = e.Parent, Parent = e.Child, Weight = e.Weight }).ToList());
 
             return notDirectionedEdges;
         }
 
-        public static double[][] ToAdjacencyMatrix(this List<WeightedEdge> edges)
+        public static double[][] ToAdjacencyMatrix(this List<Edge> edges)
         {
             var nodesCount = edges.ToList().GetNodesCount();
             var adjacencyMatrix = Enumerable.Range(0, nodesCount)
@@ -29,7 +29,7 @@ namespace CorporateNetworks.Common.Extensions
             return adjacencyMatrix;
         }
 
-        public static int GetNodesCount(this List<WeightedEdge> edges)
+        public static int GetNodesCount(this List<Edge> edges)
         {
             var nodes = edges.Select(e => e.Parent).Distinct().ToList();
             nodes.AddRange(edges.Select(e => e.Child).Distinct().ToList());

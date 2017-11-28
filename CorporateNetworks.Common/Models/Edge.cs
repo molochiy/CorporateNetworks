@@ -1,8 +1,8 @@
 ﻿namespace CorporateNetworks.Common.Models
 {
-    public class WeightedEdge
+    public class Edge
     {
-        public WeightedEdge()
+        public Edge()
         {
             this.Weight = double.PositiveInfinity;
         }

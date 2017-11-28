@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using CorporateNetworks.Common.Algorithms;
 using CorporateNetworks.Common.Drawing;
 using CorporateNetworks.Common.Extensions;
 using CorporateNetworks.Common.Generation;
@@ -19,7 +20,7 @@ namespace CorporateNetworks.Yen
     public partial class MainWindow : Window
     {
         private readonly Graph graphDrawing;
-        private readonly List<WeightedEdge> edges = new List<WeightedEdge>();
+        private readonly List<Edge> edges = new List<Edge>();
         private double[][] adjacencyMatrix;
 
         public MainWindow()
@@ -43,7 +44,7 @@ namespace CorporateNetworks.Yen
 
             if (openFileDialog.ShowDialog() == true)
             {
-                this.Draw(XmlSerialization.ReadFromXmlFile<List<WeightedEdge>>(openFileDialog.FileName));
+                this.Draw(XmlSerialization.ReadFromXmlFile<List<Edge>>(openFileDialog.FileName));
             }
         }
 
@@ -60,7 +61,7 @@ namespace CorporateNetworks.Yen
             }
         }
 
-        private void Draw(List<WeightedEdge> edgesToWrite)
+        private void Draw(List<Edge> edgesToWrite)
         {
             this.edges.Clear();
             this.edges.AddRange(edgesToWrite);

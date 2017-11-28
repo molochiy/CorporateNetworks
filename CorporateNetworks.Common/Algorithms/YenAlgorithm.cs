@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CorporateNetworks.Common.Algorithms;
 using CorporateNetworks.Common.Models;
 
-namespace CorporateNetworks.Yen
+namespace CorporateNetworks.Common.Algorithms
 {
     public class YenAlgorithm
     {
-        public static IEnumerable<YenResultModel> Run(double[][] adjacencyMatrix, int nodeToStart, int nodeToEnd, int amountPaths)
+        public static IEnumerable<IteratedPath> Run(double[][] adjacencyMatrix, int nodeToStart, int nodeToEnd, int amountPaths)
         {
             var adjacencyMatrixCopy = adjacencyMatrix.Select(s => s.ToArray()).ToArray();
-            var result = new List<YenResultModel>();
+            var result = new List<IteratedPath>();
 
             var shortestWays = DijkstraAlgorithm.Run(adjacencyMatrixCopy, nodeToStart);
             var shortestWay = shortestWays.First(sw => sw.Node == nodeToEnd);
-            result.Add(new YenResultModel
+            result.Add(new IteratedPath
             {
                 Iteration = 0,
                 Path = shortestWay.Path,
@@ -26,7 +25,7 @@ namespace CorporateNetworks.Yen
             {
                 var minWeight = double.PositiveInfinity;
                 Tuple<int, int> deletedEdge = null;
-                WeightedResultModel newShortestWay = null;
+                PathToNode newShortestWay = null;
                 var nodesFromPath = shortestWay.Path.ToString().Split(new []{ "=>" }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
                 for (var i = 1; i < nodesFromPath.Count; i++)
                 {
@@ -50,7 +49,7 @@ namespace CorporateNetworks.Yen
                 if (newShortestWay != null)
                 {
                     shortestWay = newShortestWay;
-                    result.Add(new YenResultModel
+                    result.Add(new IteratedPath
                     {
                         Iteration = k,
                         Path = shortestWay.Path,

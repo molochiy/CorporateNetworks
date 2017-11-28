@@ -1,11 +1,9 @@
 ﻿using System.Text;
 
-namespace CorporateNetworks.Yen
+namespace CorporateNetworks.Common.Models
 {
-    public class YenResultModel
+    public class WeightedPath
     {
-        public int Iteration { get; set; }
-
         public StringBuilder Path { get; set; }
 
         public double Weight { get; set; }

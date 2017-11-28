@@ -88,7 +88,7 @@ namespace CorporateNetworks.BFS
             this.ResultGroupBox.IsEnabled = true;
             this.ResultDataGrid.ItemsSource = result;
             this.ResultDataGrid.Items.Refresh();
-            this.ElapsedTimeText.Text = $"{timer.ElapsedMilliseconds} ms";
+            this.ElapsedTimeText.Text = TimeSpan.FromTicks(timer.ElapsedTicks).ToString();
         }
     }
 }

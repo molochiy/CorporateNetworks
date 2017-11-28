@@ -52,12 +52,12 @@
     <Compile Include="Extensions\ListEdgesExtension.cs" />
     <Compile Include="Extensions\ListResultsExtension.cs" />
     <Compile Include="Generation\EdgeGeneration.cs" />
+    <Compile Include="Models\IteratedPath.cs" />
     <Compile Include="Models\Node.cs" />
     <Compile Include="Models\Position.cs" />
     <Compile Include="Models\WeightedPath.cs" />
     <Compile Include="Models\PathToNode.cs" />
     <Compile Include="Models\Edge.cs" />
-    <Compile Include="Models\IteratedPath.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialization\XmlSerialization.cs" />
   </ItemGroup>

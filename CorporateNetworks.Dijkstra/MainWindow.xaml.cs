@@ -65,7 +65,7 @@ namespace CorporateNetworks.Dijkstra
         {
             this.edges.Clear();
             this.edges.AddRange(edgesToWrite);
-            this.graphDrawing.Draw(this.edges.ToList());
+            this.graphDrawing.Draw(this.edges);
             this.adjacencyMatrix = edgesToWrite.ToAdjacencyMatrix();
             this.NodeToStart.Minimum = 0;
             this.NodeToStart.Maximum = this.adjacencyMatrix.Length - 1;
@@ -87,7 +87,7 @@ namespace CorporateNetworks.Dijkstra
             this.ResultGroupBox.IsEnabled = true;
             this.ResultDataGrid.ItemsSource = result;
             this.ResultDataGrid.Items.Refresh();
-            this.ElapsedTimeText.Text = $"{timer.ElapsedMilliseconds} ms";
+            this.ElapsedTimeText.Text = TimeSpan.FromTicks(timer.ElapsedTicks).ToString();
         }
     }
 }

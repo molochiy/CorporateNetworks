@@ -44,6 +44,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algorithms\AdaptiveAcceleratedRoutingAlgorithm.cs" />
     <Compile Include="Algorithms\BellmanFordAlgorithm.cs" />
     <Compile Include="Algorithms\BFSAlgorithm.cs" />
     <Compile Include="Algorithms\DijkstraAlgorithm.cs" />

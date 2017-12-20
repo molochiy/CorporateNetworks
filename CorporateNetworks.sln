@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorporateNetwork.PairTransi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorporateNetworks.AdaptiveAcceleratedRouting", "CorporateNetworks.AdaptiveAcceleratedRouting\CorporateNetworks.AdaptiveAcceleratedRouting.csproj", "{3D6AAA5D-05B3-47A4-B941-6170E79B788B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorporateNetworks.PairPermutations", "CorporateNetworks.PairPermutations\CorporateNetworks.PairPermutations.csproj", "{0C5DB4C0-1356-4612-916F-BB2BE954A861}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{3D6AAA5D-05B3-47A4-B941-6170E79B788B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D6AAA5D-05B3-47A4-B941-6170E79B788B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D6AAA5D-05B3-47A4-B941-6170E79B788B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C5DB4C0-1356-4612-916F-BB2BE954A861}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C5DB4C0-1356-4612-916F-BB2BE954A861}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C5DB4C0-1356-4612-916F-BB2BE954A861}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C5DB4C0-1356-4612-916F-BB2BE954A861}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

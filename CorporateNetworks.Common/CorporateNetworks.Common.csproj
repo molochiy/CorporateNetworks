@@ -48,6 +48,7 @@
     <Compile Include="Algorithms\BellmanFordAlgorithm.cs" />
     <Compile Include="Algorithms\BFSAlgorithm.cs" />
     <Compile Include="Algorithms\DijkstraAlgorithm.cs" />
+    <Compile Include="Algorithms\PairPermutationsAlgorithm.cs" />
     <Compile Include="Algorithms\PairTransitionsAlgorithm.cs" />
     <Compile Include="Algorithms\YenAlgorithm.cs" />
     <Compile Include="Drawing\Graph.cs" />
